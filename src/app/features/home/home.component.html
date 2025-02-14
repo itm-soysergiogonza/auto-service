@@ -1,0 +1,98 @@
+<div class="container py-4">
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+      <h2 class="h4 mb-0">Órdenes de Servicio</h2>
+      <button class="btn btn-light">
+        <i class="bi bi-plus-lg me-2"></i>Nueva Orden
+      </button>
+    </div>
+    <div class="card-body">
+      <!-- Filtros -->
+      <div class="row mb-3">
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-text">
+              <i class="bi bi-search"></i>
+            </span>
+            <input type="text" class="form-control" placeholder="Buscar orden...">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <select class="form-select">
+            <option value="">Todos los estados</option>
+            <option value="pending">Pendiente</option>
+            <option value="in_progress">En proceso</option>
+            <option value="completed">Completado</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Tabla -->
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Placa</th>
+            <th>Vehículo</th>
+            <th>Tipo de Servicio</th>
+            <th>Estado</th>
+            <th>Fecha</th>
+            <th>Acciones</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let order of orders">
+            <td>{{ order.id }}</td>
+            <td>{{ order.plate }}</td>
+            <td>{{ order.brand }} {{ order.model }}</td>
+            <td>{{ order.serviceType }}</td>
+            <td>
+                <span [ngClass]="{
+                  'badge rounded-pill': true,
+                  'bg-warning': order.status === 'En proceso',
+                  'bg-success': order.status === 'Completado',
+                  'bg-secondary': order.status === 'Pendiente'
+                }">
+                  {{ order.status }}
+                </span>
+            </td>
+            <td>{{ order.date }}</td>
+            <td>
+              <div class="btn-group">
+                <button class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                  <i class="bi bi-eye"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-warning" title="Editar">
+                  <i class="bi bi-pencil"></i>
+                </button>
+                <button class="btn btn-sm btn-outline-danger"
+                        title="Eliminar"
+                        (click)="deleteOrder(order.id)">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Paginación -->
+      <nav aria-label="Page navigation" class="mt-4">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1">Anterior</a>
+          </li>
+          <li class="page-item active"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Siguiente</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
