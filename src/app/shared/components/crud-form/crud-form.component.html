@@ -10,14 +10,7 @@
     <div class="card-body">
       <!-- Filtros -->
       <div class="row mb-3">
-        <div class="col-md-4">
-          <div class="input-group">
-            <span class="input-group-text">
-              <i class="bi bi-search"></i>
-            </span>
-            <input type="text" class="form-control" placeholder="Buscar orden...">
-          </div>
-        </div>
+        <app-search-bar></app-search-bar>
         <div class="col-md-3">
           <select class="form-select">
             <option value="">Todos los estados</option>
@@ -35,7 +28,6 @@
           <tr>
             <th>ID</th>
             <th>Placa</th>
-            <th>Vehículo</th>
             <th>Tipo de Servicio</th>
             <th>Estado</th>
             <th>Fecha</th>
@@ -46,25 +38,28 @@
           <tr *ngFor="let order of orders">
             <td>{{ order.id }}</td>
             <td>{{ order.plate }}</td>
-            <td>{{ order.brand }} {{ order.model }}</td>
             <td>{{ order.serviceType }}</td>
             <td>
-                <span [ngClass]="{
-                  'badge rounded-pill': true,
-                  'bg-warning': order.status === 'En proceso',
-                  'bg-success': order.status === 'Completado',
-                  'bg-secondary': order.status === 'Pendiente'
-                }">
-                  {{ order.status }}
-                </span>
+              <span [ngClass]="{
+                'badge rounded-pill': true,
+                'bg-warning': order.status === 'En proceso',
+                'bg-success': order.status === 'Completado',
+                'bg-secondary': order.status === 'Pendiente'
+              }">
+                {{ order.status }}
+              </span>
             </td>
-            <td>{{ order.date }}</td>
+            <td>{{ order.date | date:'yyyy-MM-dd' }}</td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-sm btn-outline-primary" title="Ver detalles">
+                <button class="btn btn-sm btn-outline-primary" 
+                        title="Ver detalles"
+                        (click)="viewDetails(order.id)">
                   <i class="bi bi-eye"></i>
                 </button>
-                <button class="btn btn-sm btn-outline-warning" title="Editar">
+                <button class="btn btn-sm btn-outline-warning" 
+                        title="Editar"
+                        (click)="editOrder(order.id)">
                   <i class="bi bi-pencil"></i>
                 </button>
                 <button class="btn btn-sm btn-outline-danger"
@@ -95,3 +90,9 @@
     </div>
   </div>
 </div>
+
+<!-- Agregar el componente modal de detalles -->
+<app-modal-details #modalDetails></app-modal-details>
+
+<!-- Al final del template -->
+<app-modal-edit #modalEdit (orderUpdated)="handleOrderUpdated()"></app-modal-edit>

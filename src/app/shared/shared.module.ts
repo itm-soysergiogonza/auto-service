@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HeaderComponent} from './components/header/header.component';
 import {CrudFormComponent} from './components/crud-form/crud-form.component';
+import {SearchBarComponent} from './components/search-bar/search-bar.component';
 
 
 
@@ -10,7 +11,8 @@ import {CrudFormComponent} from './components/crud-form/crud-form.component';
   imports: [
     CommonModule,
     HeaderComponent,
-    CrudFormComponent
+    CrudFormComponent,
+    SearchBarComponent
   ],
   exports: [
     HeaderComponent,

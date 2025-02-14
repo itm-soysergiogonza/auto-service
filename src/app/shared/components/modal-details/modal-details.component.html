@@ -1,0 +1,52 @@
+<div class="modal fade" id="modalDetails" tabindex="-1" aria-labelledby="modalDetailsLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalDetailsLabel">Detalles de la Orden</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="orderDetails">
+        <div class="card">
+          <div class="card-body">
+            <h6 class="card-subtitle mb-2 text-muted">Orden #{{ orderDetails.id }}</h6>
+            
+            <div class="mb-3">
+              <label class="fw-bold">Placa del Vehículo:</label>
+              <p>{{ orderDetails.placaVehiculo }}</p>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-bold">Tipo de Servicio:</label>
+              <p>{{ orderDetails.tipo }}</p>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-bold">Descripción:</label>
+              <p>{{ orderDetails.descripcion }}</p>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-bold">Estado:</label>
+              <span class="badge"
+                    [ngClass]="{
+                      'bg-warning': orderDetails.estado === 'EN_PROCESO',
+                      'bg-success': orderDetails.estado === 'COMPLETADO',
+                      'bg-secondary': orderDetails.estado === 'PENDIENTE'
+                    }">
+                {{ orderDetails.estado }}
+              </span>
+            </div>
+
+            <div class="mb-3">
+              <label class="fw-bold">Fecha de Orden:</label>
+              <p>{{ orderDetails.fechaOrden | date:'dd/MM/yyyy' }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div> 

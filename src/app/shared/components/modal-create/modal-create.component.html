@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="modalCreate" tabindex="-1" aria-labelledby="modalCreateLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -10,13 +9,37 @@
         <!-- Formulario -->
         <div class="mb-3">
           <label class="form-label">Placa del vehículo</label>
-          <input type="text" class="form-control" [(ngModel)]="order.plate">
+          <input type="text" 
+                 class="form-control" 
+                 [(ngModel)]="order.placaVehiculo" 
+                 placeholder="Ej: YYP123">
         </div>
         <div class="mb-3">
           <label class="form-label">Tipo de Servicio</label>
-          <select class="form-select" [(ngModel)]="order.serviceType">
-            <option value="mantenimiento">Mantenimiento</option>
-            <option value="reparación">Reparación</option>
+          <select class="form-select" [(ngModel)]="order.tipo">
+            <option value="MANTENIMIENTO">Mantenimiento</option>
+            <option value="REPARACION">Reparación</option>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Descripción</label>
+          <textarea class="form-control" 
+                    [(ngModel)]="order.descripcion" 
+                    rows="3" 
+                    placeholder="Describa el servicio a realizar"></textarea>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Fecha de Orden</label>
+          <input type="date" 
+                 class="form-control" 
+                 [(ngModel)]="order.fechaOrden">
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Estado</label>
+          <select class="form-select" [(ngModel)]="order.estado">
+            <option value="PENDIENTE">Pendiente</option>
+            <option value="EN_PROCESO">En Proceso</option>
+            <option value="COMPLETADO">Completado</option>
           </select>
         </div>
       </div>

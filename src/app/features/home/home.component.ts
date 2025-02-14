@@ -1,40 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgClass, NgForOf } from '@angular/common';
-
-interface Order {
-  id: number;
-  plate: string;
-  brand: string;
-  model: string;
-  serviceType: string;
-  status: string;
-  date: string;
-}
+import { OrderService, OrderTableData } from '../../shared/services/order.service';
+import {CrudFormComponent} from '../../shared/components/crud-form/crud-form.component';
 
 @Component({
-  selector: 'app-ordenes',
-  templateUrl: './orders.component.html',
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  imports: [CrudFormComponent],
+  standalone: true
 })
-
-export class HomeComponent {
-  orders: Order[] = [
-    {
-      id: 1,
-      plate: 'ABC123',
-      brand: 'Toyota',
-      model: 'Corolla',
-      serviceType: 'Mantenimiento',
-      status: 'En proceso',
-      date: '2024-03-15',
-    },
-    {
-      id: 2,
-      plate: 'XYZ789',
-      brand: 'Honda',
-      model: 'Civic',
-      serviceType: 'Reparación',
-      status: 'Completado',
-      date: '2024-03-14',
-    },
-  ];
-}
+export class HomeComponent {}
