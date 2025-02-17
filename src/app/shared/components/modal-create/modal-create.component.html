@@ -8,10 +8,10 @@
       <div class="modal-body">
         <div class="mb-3">
           <label class="form-label">Placa del vehículo *</label>
-          <input type="text" 
-                 class="form-control" 
+          <input type="text"
+                 class="form-control"
                  [class.is-invalid]="formErrors['placaVehiculo']"
-                 [(ngModel)]="order.placaVehiculo" 
+                 [(ngModel)]="order.placaVehiculo"
                  placeholder="Ej: YYP123">
           <div class="invalid-feedback" *ngIf="formErrors['placaVehiculo']">
             {{ formErrors['placaVehiculo'] }}
@@ -25,21 +25,21 @@
           </select>
         </div>
         <div class="mb-3">
-          <label class="form-label">Descripción *</label>
-          <textarea class="form-control" 
-                    [class.is-invalid]="formErrors['descripcion']"
-                    [(ngModel)]="order.descripcion" 
-                    rows="3" 
+          <label class="form-label">Observaciones *</label>
+          <textarea class="form-control"
+                    [class.is-invalid]="formErrors['observaciones']"
+                    [(ngModel)]="order.observaciones"
+                    rows="3"
                     placeholder="Describa el servicio a realizar"></textarea>
-          <div class="invalid-feedback" *ngIf="formErrors['descripcion']">
-            {{ formErrors['descripcion'] }}
+          <div class="invalid-feedback" *ngIf="formErrors['observaciones']">
+            {{ formErrors['observaciones'] }}
           </div>
         </div>
         <div class="mb-3">
           <label class="form-label">Fecha de Orden *</label>
-          <input type="date" 
+          <input type="date"
                  class="form-control"
-                 [class.is-invalid]="formErrors['fechaOrden']" 
+                 [class.is-invalid]="formErrors['fechaOrden']"
                  [(ngModel)]="order.fechaOrden">
           <div class="invalid-feedback" *ngIf="formErrors['fechaOrden']">
             {{ formErrors['fechaOrden'] }}

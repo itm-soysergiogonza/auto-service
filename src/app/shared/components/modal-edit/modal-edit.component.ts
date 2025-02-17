@@ -15,7 +15,7 @@ export class ModalEditComponent {
 
   orderToEdit: Order = {
     tipo: '',
-    descripcion: null,
+    observaciones: null,
     fechaOrden: '',
     estado: '',
     placaVehiculo: null
@@ -37,7 +37,7 @@ export class ModalEditComponent {
         next: (response) => {
           this._originalOrder = {
             tipo: response.tipo,
-            descripcion: response.descripcion,
+            observaciones: response.observaciones,
             fechaOrden: response.fechaOrden,
             estado: response.estado,
             placaVehiculo: response.placaVehiculo
@@ -59,15 +59,15 @@ export class ModalEditComponent {
 
   saveChanges() {
     const changes: Partial<Order> = {
-      descripcion: this._originalOrder.descripcion,
+      observaciones: this._originalOrder.observaciones,
       estado: this._originalOrder.estado,
       placaVehiculo: this._originalOrder.placaVehiculo
     };
 
-    if (this.orderToEdit.descripcion?.trim() !== this._originalOrder.descripcion) {
-      const trimmedDesc = this.orderToEdit.descripcion?.trim();
+    if (this.orderToEdit.observaciones?.trim() !== this._originalOrder.observaciones) {
+      const trimmedDesc = this.orderToEdit.observaciones?.trim();
       if (trimmedDesc) {
-        changes.descripcion = trimmedDesc;
+        changes.observaciones = trimmedDesc;
       }
     }
 

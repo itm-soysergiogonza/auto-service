@@ -13,7 +13,7 @@ import { Order } from '../../../features/order/interfaces/order.interfaces';
 export class ModalCreateComponent {
   order: Order = {
     tipo: 'MANTENIMIENTO',
-    descripcion: '',
+    observaciones: '',
     fechaOrden: new Date().toISOString().split('T')[0],
     estado: 'PENDIENTE',
     placaVehiculo: ''
@@ -44,8 +44,8 @@ export class ModalCreateComponent {
       isValid = false;
     }
 
-    if (!this.order.descripcion?.trim()) {
-      this.formErrors['descripcion'] = 'La descripción es requerida';
+    if (!this.order.observaciones?.trim()) {
+      this.formErrors['observaciones'] = 'La observación es requerida';
       isValid = false;
     }
 
@@ -62,11 +62,10 @@ export class ModalCreateComponent {
       return;
     }
 
-    // Limpiar espacios en blanco
     const cleanOrder: Order = {
       ...this.order,
       placaVehiculo: this.order.placaVehiculo?.trim() || '',
-      descripcion: this.order.descripcion?.trim() || ''
+      observaciones: this.order.observaciones?.trim() || ''
     };
 
     this._orderService.createOrder(cleanOrder).subscribe({
@@ -84,7 +83,7 @@ export class ModalCreateComponent {
   private resetForm() {
     this.order = {
       tipo: 'MANTENIMIENTO',
-      descripcion: '',
+      observaciones: '',
       fechaOrden: new Date().toISOString().split('T')[0],
       estado: 'PENDIENTE',
       placaVehiculo: ''

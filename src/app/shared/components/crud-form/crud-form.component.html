@@ -1,16 +1,14 @@
 <div class="container py-4">
   <div class="card shadow">
-    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-      <h2 class="h4 mb-0">Órdenes de Servicio</h2>
+    <div class="card-header bg-primary d-flex justify-content-between align-items-center">
+      <h2 class="h4 mb-0 text-white">Órdenes de Servicio</h2>
       <button class="btn btn-light" (click)="openCreateModal()">
         <i class="bi bi-plus-lg me-2"></i>Nueva Orden
       </button>
       <app-modal-create #modalCreate (orderCreated)="handleOrderCreated($event)"></app-modal-create>
     </div>
     <div class="card-body">
-      <!-- Filtros -->
       <div class="row mb-3">
-        <app-search-bar></app-search-bar>
         <div class="col-md-3">
           <select class="form-select">
             <option value="">Todos los estados</option>
@@ -20,8 +18,6 @@
           </select>
         </div>
       </div>
-
-      <!-- Tabla -->
       <div class="table-responsive">
         <table class="table table-hover">
           <thead>
@@ -37,7 +33,7 @@
           <tbody>
           <tr *ngFor="let order of orders">
             <td>{{ order.id }}</td>
-            <td>{{ order.placaVehiculo }}</td>
+            <td>{{ order.placaVehiculo | uppercase }}</td>
             <td>{{ order.tipo }}</td>
             <td>
               <span [ngClass]="{
