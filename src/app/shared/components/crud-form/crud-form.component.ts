@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ModalCreateComponent } from '../modal-create/modal-create.component';
 import { ModalDetailsComponent } from '../modal-details/modal-details.component';
-import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { ModalEditComponent } from '../modal-edit/modal-edit.component';
 import { OrderService } from '../../../features/order/services/order.service';
 import { Order } from '../../../features/order/interfaces/order.interfaces';
@@ -16,7 +15,6 @@ import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.compone
     DatePipe,
     ModalCreateComponent,
     ModalDetailsComponent,
-    SearchBarComponent,
     ModalEditComponent,
     ConfirmDialogComponent
   ],

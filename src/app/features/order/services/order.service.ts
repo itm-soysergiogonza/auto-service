@@ -20,7 +20,11 @@ export class OrderService {
   }
 
   updateOrder(id: number, changes: Partial<Order>): Observable<Order> {
-    return this._http.put<Order>(`${this._apiUrl}/${id}`, changes);
+    const normalizedChanges = {
+      ...changes,
+      placaVehiculo: changes.placaVehiculo ? this.normalizePlaca(changes.placaVehiculo) : undefined
+    };
+    return this._http.put<Order>(`${this._apiUrl}/${id}`, normalizedChanges);
   }
 
   deleteOrder(id: number): Observable<void> {
@@ -34,6 +38,10 @@ export class OrderService {
     };
   }
 
+  private normalizePlaca(placa: string | null | undefined): string {
+    return (placa || '').toUpperCase().trim();
+  }
+
   private translateStatus(status: string): string {
     const statusMap: { [key: string]: string } = {
       'PENDIENTE': 'Pendiente',
@@ -44,7 +52,11 @@ export class OrderService {
   }
 
   createOrder(order: Order): Observable<Order> {
-    return this._http.post<Order>(this._apiUrl, order);
+    const normalizedOrder = {
+      ...order,
+      placaVehiculo: this.normalizePlaca(order.placaVehiculo)
+    };
+    return this._http.post<Order>(this._apiUrl, normalizedOrder);
   }
 }
 
