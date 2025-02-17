@@ -7,27 +7,29 @@
       </div>
       <div class="modal-body">
         <div class="mb-3">
-          <label class="form-label">Placa del vehículo</label>
-          <input type="text" 
-                 class="form-control" 
+          <label class="form-label">Placa del vehículo *</label>
+          <input type="text"
+                 class="form-control"
                  [(ngModel)]="orderToEdit.placaVehiculo">
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Descripción</label>
-          <textarea class="form-control" 
-                    [(ngModel)]="orderToEdit.descripcion" 
+          <label class="form-label">Descripción *</label>
+          <textarea class="form-control"
+                    [(ngModel)]="orderToEdit.descripcion"
                     rows="3"></textarea>
         </div>
 
         <div class="mb-3">
-          <label class="form-label">Estado</label>
-          <select class="form-select" [(ngModel)]="orderToEdit.estado">
+          <label class="form-label">Estado *</label>
+          <select class="form-select"
+                  [(ngModel)]="orderToEdit.estado">
             <option value="PENDIENTE">Pendiente</option>
             <option value="EN_PROCESO">En Proceso</option>
             <option value="FINALIZADO">Finalizado</option>
           </select>
         </div>
+        <small class="text-muted">* Campos requeridos</small>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancelar</button>
@@ -35,4 +37,4 @@
       </div>
     </div>
   </div>
-</div> 
+</div>

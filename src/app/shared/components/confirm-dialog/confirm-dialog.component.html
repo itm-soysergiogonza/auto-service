@@ -1,0 +1,28 @@
+<div class="modal fade" id="confirmDialog" tabindex="-1" aria-labelledby="confirmDialogLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="confirmDialogLabel">Confirmar Eliminación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-warning">
+          <i class="bi bi-exclamation-triangle me-2"></i>
+          <p class="mb-0">¿Está seguro de que desea eliminar esta orden?</p>
+        </div>
+        <p class="text-danger small">
+          <i class="bi bi-info-circle me-1"></i>
+          Esta acción no se puede deshacer.
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="close()">
+          <i class="bi bi-x-circle me-1"></i>Cancelar
+        </button>
+        <button type="button" class="btn btn-danger" (click)="confirm()">
+          <i class="bi bi-trash me-1"></i>Eliminar
+        </button>
+      </div>
+    </div>
+  </div>
+</div> 

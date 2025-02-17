@@ -37,33 +37,34 @@
           <tbody>
           <tr *ngFor="let order of orders">
             <td>{{ order.id }}</td>
-            <td>{{ order.plate }}</td>
-            <td>{{ order.serviceType }}</td>
+            <td>{{ order.placaVehiculo }}</td>
+            <td>{{ order.tipo }}</td>
             <td>
               <span [ngClass]="{
                 'badge rounded-pill': true,
-                'bg-warning': order.status === 'En proceso',
-                'bg-success': order.status === 'Completado',
-                'bg-secondary': order.status === 'Pendiente'
+                'bg-warning': order.estado === 'EN_PROCESO',
+                'bg-success': order.estado === 'FINALIZADO',
+                'bg-secondary': order.estado === 'PENDIENTE'
               }">
-                {{ order.status }}
+                {{ order.estado }}
               </span>
             </td>
-            <td>{{ order.date | date:'yyyy-MM-dd' }}</td>
+            <td>{{ order.fechaOrden | date:'yyyy-MM-dd' }}</td>
             <td>
               <div class="btn-group">
-                <button class="btn btn-sm btn-outline-primary" 
+                <button class="btn btn-sm btn-outline-primary"
                         title="Ver detalles"
-                        (click)="viewDetails(order.id)">
+                        (click)="viewDetails(order.id!)">
                   <i class="bi bi-eye"></i>
                 </button>
-                <button class="btn btn-sm btn-outline-warning" 
+                <button class="btn btn-sm btn-outline-warning"
                         title="Editar"
-                        (click)="editOrder(order.id)">
+                        (click)="editOrder(order.id!)">
                   <i class="bi bi-pencil"></i>
                 </button>
                 <button class="btn btn-sm btn-outline-danger"
-                        title="Eliminar">
+                        title="Eliminar"
+                        (click)="deleteOrder(order.id!)">
                   <i class="bi bi-trash"></i>
                 </button>
               </div>
@@ -72,27 +73,12 @@
           </tbody>
         </table>
       </div>
-
-      <!-- Paginación -->
-      <nav aria-label="Page navigation" class="mt-4">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1">Anterior</a>
-          </li>
-          <li class="page-item active"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Siguiente</a>
-          </li>
-        </ul>
-      </nav>
     </div>
   </div>
 </div>
 
-<!-- Agregar el componente modal de detalles -->
 <app-modal-details #modalDetails></app-modal-details>
 
-<!-- Al final del template -->
 <app-modal-edit #modalEdit (orderUpdated)="handleOrderUpdated()"></app-modal-edit>
+
+<app-confirm-dialog #confirmDialog (confirmed)="confirmDelete()"></app-confirm-dialog>

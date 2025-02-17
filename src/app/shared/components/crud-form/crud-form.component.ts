@@ -1,22 +1,24 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { NgClass, NgForOf, DatePipe } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { ModalCreateComponent } from '../modal-create/modal-create.component';
 import { ModalDetailsComponent } from '../modal-details/modal-details.component';
-import { OrderService, OrderTableData } from '../../services/order.service';
-import {SearchBarComponent} from '../search-bar/search-bar.component';
+import { SearchBarComponent } from '../search-bar/search-bar.component';
 import { ModalEditComponent } from '../modal-edit/modal-edit.component';
+import { OrderService } from '../../../features/order/services/order.service';
+import { Order } from '../../../features/order/interfaces/order.interfaces';
+import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-crud-form',
   standalone: true,
   imports: [
-    NgClass,
-    NgForOf,
+    CommonModule,
     DatePipe,
     ModalCreateComponent,
     ModalDetailsComponent,
     SearchBarComponent,
-    ModalEditComponent
+    ModalEditComponent,
+    ConfirmDialogComponent
   ],
   templateUrl: './crud-form.component.html',
 })
@@ -24,20 +26,21 @@ export class CrudFormComponent implements OnInit {
   @ViewChild('modalCreate') modalCreate!: ModalCreateComponent;
   @ViewChild('modalDetails') modalDetails!: ModalDetailsComponent;
   @ViewChild('modalEdit') modalEdit!: ModalEditComponent;
+  @ViewChild('confirmDialog') confirmDialog!: ConfirmDialogComponent;
 
-  orders: OrderTableData[] = [];
+  orders: Order[] = [];
+  private orderToDelete: number | null = null;
 
-  constructor(private orderService: OrderService) {}
+  constructor(private _orderService: OrderService) {}
 
   ngOnInit() {
     this.loadOrders();
   }
 
   loadOrders() {
-    this.orderService.getOrders().subscribe({
+    this._orderService.getOrders().subscribe({
       next: (response) => {
-        console.log('Órdenes actualizadas:', response);
-        this.orders = response.map(order => this.orderService.mapToTableData(order));
+        this.orders = response;
       },
       error: (error) => {
         console.error('Error al cargar las órdenes:', error);
@@ -49,7 +52,7 @@ export class CrudFormComponent implements OnInit {
     this.modalCreate.openModal();
   }
 
-  handleOrderCreated(order: any) {
+  handleOrderCreated(order: Order) {
     this.loadOrders();
   }
 
@@ -62,7 +65,28 @@ export class CrudFormComponent implements OnInit {
   }
 
   handleOrderUpdated() {
-    console.log('Actualizando lista de órdenes...');
     this.loadOrders();
+  }
+
+  deleteOrder(orderId: number) {
+    this.orderToDelete = orderId;
+    setTimeout(() => {
+      this.confirmDialog.show();
+    });
+  }
+
+  confirmDelete() {
+    if (this.orderToDelete) {
+      this._orderService.deleteOrder(this.orderToDelete).subscribe({
+        next: () => {
+          this.loadOrders();
+          this.orderToDelete = null;
+        },
+        error: (error) => {
+          console.error('Error al eliminar la orden:', error);
+          this.orderToDelete = null;
+        }
+      });
+    }
   }
 }

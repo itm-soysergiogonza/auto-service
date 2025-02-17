@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { OrderService, OrderResponse } from '../../services/order.service';
+import { Order } from '../../../features/order/interfaces/order.interfaces';
+import { OrderService } from '../../../features/order/services/order.service';
 
 @Component({
   selector: 'app-modal-details',
@@ -9,31 +10,31 @@ import { OrderService, OrderResponse } from '../../services/order.service';
   imports: [CommonModule]
 })
 export class ModalDetailsComponent {
-  orderDetails: OrderResponse | null = null;
-  private modalInstance: any;
+  orderDetails: Order | null = null;
+  private _modalInstance: any;
 
-  constructor(private orderService: OrderService) {}
+  constructor(private _orderService: OrderService) {}
 
   openModal(orderId: number) {
-    this.orderService.getOrderById(orderId).subscribe({
+    this._orderService.getOrderById(orderId).subscribe({
       next: (response) => {
         this.orderDetails = response;
         const modalElement = document.getElementById('modalDetails');
         if (modalElement) {
-          this.modalInstance = new (window as any).bootstrap.Modal(modalElement);
-          this.modalInstance.show();
+          this._modalInstance = new (window as any).bootstrap.Modal(modalElement);
+          this._modalInstance.show();
         }
       },
-      error: (error) => {
+      error: (error: Error) => {
         console.error('Error al cargar los detalles de la orden:', error);
       }
     });
   }
 
   closeModal() {
-    if (this.modalInstance) {
-      this.modalInstance.hide();
+    if (this._modalInstance) {
+      this._modalInstance.hide();
       this.orderDetails = null;
     }
   }
-} 
+}

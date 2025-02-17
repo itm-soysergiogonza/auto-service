@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NgClass, NgForOf } from '@angular/common';
-import { OrderService, OrderTableData } from '../../shared/services/order.service';
+import { Component } from '@angular/core';
 import {CrudFormComponent} from '../../shared/components/crud-form/crud-form.component';
 
 @Component({
